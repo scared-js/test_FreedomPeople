@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 class UserController extends Controller
 {
     public function login()
@@ -55,7 +59,7 @@ class UserController extends Controller
                 throw new Exception($error);
             }
 
-            $user = Auth('api')->user();
+            $user = Auth()->user();
             $user->update($data);
             $user->save();
 

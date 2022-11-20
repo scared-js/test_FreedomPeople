@@ -18,7 +18,7 @@ class Admin
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        $user = Auth('api')->user();
+        $user = Auth()->user();
         if ($user->role === User::role_admin) {
             return $next($request);
         } else {
