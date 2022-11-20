@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use \App\Http\Controllers\UserController;
+use \App\Http\Controllers\CarController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('user')->group(function () {
+    Route::post('/login', [UserController::class, 'login']);
+    Route::post('/save', [UserController::class, 'save'])->middleware('auth:api');
+    Route::post('/search', [UserController::class, 'search'])->middleware('auth:api','admin');
 });
+
+Route::middleware(['auth:api'])->group(function () {
+    Route::prefix('car')->group(function () {
+        Route::post('/search', [CarController::class, 'search']);
+        Route::post('/save', [CarController::class, 'save'])->middleware('admin');
+        Route::post('/delete', [CarController::class, 'delete'])->middleware('admin');
+
+        Route::post('/assign', [CarController::class, 'assign']);
+    });
+});
+
+
+
