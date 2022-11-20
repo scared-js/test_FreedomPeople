@@ -22,8 +22,6 @@ return new class extends Migration
             $table->foreign('car_id')->references('id')->on('cars');
 
             $table->integer('status')->default(1);
-            $table->date('date_in');
-            $table->date('date_out');
             $table->timestamps();
         });
     }

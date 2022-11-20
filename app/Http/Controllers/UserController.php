@@ -80,6 +80,7 @@ class UserController extends Controller
             $first_item = ($page - 1) * $page_size;
             $last_item = $first_item + $page_size;
             $query = User::query();
+            $query->with('pivot.car');
 
             $rows_all = $query->count();
             $query->skip($first_item);

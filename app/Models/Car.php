@@ -14,4 +14,9 @@ class Car extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function pivot()
+    {
+        return $this->hasMany(PivotUserCar::class, 'car_id');
+    }
 }

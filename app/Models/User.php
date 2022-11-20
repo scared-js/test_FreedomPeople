@@ -34,4 +34,9 @@ class User extends Authenticatable
         'password',
         'api_token',
     ];
+
+    public function pivot()
+    {
+        return $this->hasMany(PivotUserCar::class, 'user_id');
+    }
 }
