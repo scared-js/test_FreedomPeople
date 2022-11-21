@@ -1,0 +1,117 @@
+swagger: '2.0'
+info:
+  description: A Simple IP Address API
+  title: TestCase
+  version: v1
+paths:
+  /api/user/login:
+    post:
+      description: Метод для авторизации пользователя и получения ключа
+      summary:
+      parameters:
+        - in: path
+          name: email
+          type: string
+          description: 'Адрес электронной почты аккаунта'
+          required: true         
+        - in: path
+          name: password
+          type: string
+          description: 'Пароль аккаунта'
+          required: true         
+      responses:
+        '200':
+          description: Successful operation
+  /api/user/save:
+    post:
+      description: Метод для редактирования пользователя (Только для авторизированых пользователей)
+      summary:
+      parameters:
+        - in: path
+          name: name
+          type: string
+          description: 'Имя пользователя'
+          required: true         
+      responses:
+        '200':
+          description: Success response
+      security:
+        - api_key: []
+  /api/user/search:
+    post:
+      description: Метод для получения списка пользователей (Доступен только администраторам)
+      summary:
+      parameters:
+        - in: path
+          name: page
+          type: number
+          description: 'Номер страницы'
+          required: false         
+      responses:
+        '200':
+          description: Success response
+      security:
+        - api_key: []
+  /api/car/search:
+    post:
+      description: Метод для получения списка автомобилей (Только для авторизированых пользователей)
+      summary:
+      parameters:
+        - in: path
+          name: page
+          type: number
+          description: 'Номер страницы'
+          required: false         
+      responses:
+        '200':
+          description: Success response
+      security:
+        - api_key: []
+  /api/car/save:
+    post:
+      description: Метод для редактирование или создания автомобиля (Доступен только администраторам)
+      summary:
+      parameters:
+        - in: path
+          name: id
+          type: number
+          description: 'ID автомобиля'
+          required: false         
+        - in: path
+          name: name
+          type: string
+          description: 'Название автомобиля'
+          required: true         
+      responses:
+        '200':
+          description: Success response
+      security:
+        - api_key: []
+  /api/car/delete:
+    post:
+      description: Метод для удаления автомобиля (Доступен только администраторам)
+      summary:
+      parameters:
+        - in: path
+          name: id
+          type: number
+          description: 'ID автомобиля'
+          required: true         
+      responses:
+        '200':
+          description: Success response
+  /api/car/assign:
+    post:
+      description: Метод для соединения автомобиля с пользователем, к текущему пользователю присоединяется автомобиль (Только для авторизированых пользователей)
+      summary:
+      parameters:
+        - in: path
+          name: car_id
+          type: string
+          description: 'ID автомобиля'
+          required: true         
+      responses:
+        '200':
+          description: Success response
+      security:
+        - api_key: []
